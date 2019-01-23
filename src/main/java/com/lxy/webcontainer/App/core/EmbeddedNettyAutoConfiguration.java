@@ -17,13 +17,12 @@ import org.springframework.core.Ordered;
 public class EmbeddedNettyAutoConfiguration {
 
     @Configuration
-    @ConditionalOnClass({Bootstrap.class}) // Netty的Bootstrap类必须在classloader中存在，才能启动Netty容器
-    @ConditionalOnMissingBean(value = EmbeddedNettyServerContainer.class, search = SearchStrategy.CURRENT)
+    @ConditionalOnClass({Bootstrap.class})
+    @ConditionalOnMissingBean(value = EmbeddedNettyServerFactory.class, search = SearchStrategy.CURRENT)
     public static class EmbeddedNetty {
-        //上述条件注解成立的话就会构造EmbeddedNettyFactory这个EmbeddedServletContainerFactory
         @Bean
-        public EmbeddedNettyServletContainer embeddedNettyFactory() {
-            return new EmbeddedNettyServletContainer();
+        public EmbeddedNettyServletFactory embeddedNettyFactory() {
+            return new EmbeddedNettyServletFactory();
         }
     }
 }

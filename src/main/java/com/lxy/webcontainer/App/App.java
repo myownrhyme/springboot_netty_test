@@ -4,19 +4,13 @@ package com.lxy.webcontainer.App;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.concurrent.Callable;
 
 @Controller
@@ -47,15 +41,7 @@ public class App {
     public Message json() {
         return new Message(MESSAGE);
     }
-    @Bean
-    public ServletRegistrationBean nullServletRegistration() {
-        return new ServletRegistrationBean(new HttpServlet(){
-            @Override
-            protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                resp.getOutputStream().print("Null Servlet Test");
-            }
-        }, "/null");
-    }
+
     private static class Message {
         private final String message;
         public Message(String message) {

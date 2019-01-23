@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @RestController
 @EnableAutoConfiguration
 public class Example implements CommandLineRunner {
@@ -17,7 +20,7 @@ public class Example implements CommandLineRunner {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(Example.class,args);
+
     }
 
     @Override

@@ -9,11 +9,15 @@ import org.springframework.core.io.ResourceLoader;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-public class EmbeddedNettyServletContainer extends AbstractServletWebServerFactory implements ResourceLoaderAware {
+public class EmbeddedNettyServletFactory extends AbstractServletWebServerFactory implements ResourceLoaderAware {
 
     @Override
     public WebServer getWebServer(ServletContextInitializer... initializers) {
-        ServletContext context = null;
+
+//        ServletWebServerApplicationContext context = new ServletWebServerApplicationContext();
+//        context.setServletContext(new NettyServletContext());
+
+        ServletContext context = new NettyServletContext(getContextPath());
         for(ServletContextInitializer initializer : initializers){
             try{
                 initializer.onStartup(context);
@@ -22,7 +26,7 @@ public class EmbeddedNettyServletContainer extends AbstractServletWebServerFacto
             }
         }
 
-        return null;
+        return new NettyServletContainer();
     }
 
     @Override
