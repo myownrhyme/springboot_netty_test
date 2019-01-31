@@ -8,15 +8,14 @@ import org.springframework.core.io.ResourceLoader;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import java.net.InetSocketAddress;
 
 public class EmbeddedNettyServletFactory extends AbstractServletWebServerFactory implements ResourceLoaderAware {
 
     @Override
     public WebServer getWebServer(ServletContextInitializer... initializers) {
 
-//        ServletWebServerApplicationContext context = new ServletWebServerApplicationContext();
-//        context.setServletContext(new NettyServletContext());
-
+        InetSocketAddress address = new InetSocketAddress(9999);
         ServletContext context = new NettyServletContext(getContextPath());
         for(ServletContextInitializer initializer : initializers){
             try{
@@ -26,7 +25,7 @@ public class EmbeddedNettyServletFactory extends AbstractServletWebServerFactory
             }
         }
 
-        return new NettyServletContainer();
+        return new NettyServletContainer(address,context);
     }
 
     @Override
