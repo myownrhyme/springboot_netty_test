@@ -6,11 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.util.concurrent.Callable;
 
 @Controller
 @EnableAutoConfiguration(exclude = WebMvcAutoConfiguration.class)
@@ -23,6 +19,7 @@ public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class,args);
     }
+
 
 
 
